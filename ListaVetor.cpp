@@ -12,11 +12,6 @@ int tamanho = 0;
 
 void insereLista(int valor) {
     system("cls");
-    if (tamanho == TAM) {
-        cout << "\n\n\n\n\n\n\t\t\tLista Cheia!";
-        Sleep(2000);
-        return;
-    }
     int i;
     for (i = tamanho; i>0 && valor<lista[i-1]; i--) {
         lista[i] = lista[i-1];
@@ -55,11 +50,6 @@ void removeLista(int posicao) {
 
 void buscaLista(int valor) {
     system("cls");
-    if (tamanho == 0) {
-        cout << "\n\n\n\n\n\n\t    Lista Vazia! Insira um novo elemento.";
-        Sleep(2000);
-        return;
-    }
     int i;
     for (i=0; i<tamanho; i++) {
         if (lista[i] == valor) {
@@ -67,7 +57,6 @@ void buscaLista(int valor) {
             system("pause");
             return;
         }
-        i++;
     }
     cout << "\n\n\n\n\n\n\t  O valor digitador não se encontra na lista!";
     Sleep(2500);
@@ -75,11 +64,6 @@ void buscaLista(int valor) {
 
 void imprime() {
     system("cls");
-    if (tamanho == 0) {
-        cout << "\n\n\n\n\n\n\t    Lista Vazia! Insira um novo elemento.";
-        Sleep(2000);
-        return;
-    }
     int i;
     cout << "\n\n\t\t\t     Posição   Valores\n";
     for (i=0; i<TAM; i++) {
@@ -92,11 +76,6 @@ void imprime() {
 
 void recuperaLista(int posicao) {
     system("cls");
-    if (tamanho == 0) {
-        cout << "\n\n\n\n\n\n\t    Lista Vazia! Insira um novo elemento.";
-        Sleep(2000);
-        return;
-    }
     if (posicao < 0 || posicao > tamanho) {
         cout << "\n\n\n\n\n\n\t\t\tPosição inválida!";
         Sleep(2000);
@@ -122,6 +101,11 @@ void menu() {
     switch (aux) {
     case 1:
         system("cls");
+        if (tamanho == TAM) {
+            cout << "\n\n\n\n\n\n\t\t\tLista Cheia!";
+            Sleep(2000);
+            menu();
+        }
         cout << "\n\n\n\n\n\n\tDigite o valor que deseja inserir na lista: ";
         cin >> aux;
         cout << "\n";
@@ -129,6 +113,11 @@ void menu() {
         menu();
     case 2:
         system("cls");
+        if (tamanho == 0) {
+            cout << "\n\n\n\n\n\n\t    Lista Vazia! Insira um novo elemento.";
+            Sleep(2000);
+            menu();
+        }
         cout << "\n\n\n\n\n\n\t\tDigite a posição do valor que deseja remover: ";
         cin >> aux;
         cout << "\n";
@@ -136,16 +125,32 @@ void menu() {
         menu();
     case 3:
         system("cls");
+        if (tamanho == 0) {
+            cout << "\n\n\n\n\n\n\t    Lista Vazia! Insira um novo elemento.";
+            Sleep(2000);
+            menu();
+        }
         cout << "\n\n\n\n\n\n\tDigite o valor que deseja buscar na lista: ";
         cin >> aux;
         cout << "\n";
         buscaLista(aux);
         menu();
     case 4:
+        if (tamanho == 0) {
+            system("cls");
+            cout << "\n\n\n\n\n\n\t    Lista Vazia! Insira um novo elemento.";
+            Sleep(2000);
+            menu();
+        }
         imprime();
         menu();
     case 5:
         system("cls");
+        if (tamanho == 0) {
+            cout << "\n\n\n\n\n\n\t    Lista Vazia! Insira um novo elemento.";
+            Sleep(2000);
+            menu();
+        }
         cout << "\n\n\n\n\n\n\t\t  Digite a posição do elemento\n\t\tque deseja recuperar da lista: ";
         cin >> aux;
         cout << "\n";

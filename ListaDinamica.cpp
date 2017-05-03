@@ -22,8 +22,11 @@ void insereLista(int valor) {
     if (atual == NULL) {
         lista = aux;
         aux->prox = NULL;
-    } else if (lista->dado > valor) {
+    } else if (lista->prox == NULL && lista->dado > valor) {
         lista->prox = NULL;
+        aux->prox = lista;
+        lista = aux;
+    } else if (lista->dado > valor) {
         aux->prox = lista;
         lista = aux;
     } else {
@@ -40,11 +43,6 @@ void insereLista(int valor) {
 
 void removeLista(int posicao) {
     system("cls");
-    if (lista == NULL) {
-        cout << "\n\n\n\n\n\n\t    Lista Vazia! Insira um novo elemento.";
-        Sleep(2000);
-        return;
-    }
     if (posicao == 1 && lista->prox == NULL) {
         lista = NULL;
         delete(lista);
@@ -62,7 +60,7 @@ void removeLista(int posicao) {
     struct no *atual;
     struct no *anterior;
     atual = lista;
-    for (i=0; i<posicao; i++) {
+    for (i=1; i<posicao; i++) {
         if (atual->prox == NULL) {
             cout << "\n\n\n\n\n\n\t    Posição inválida, digite outra posição!";
             Sleep(2000);
@@ -70,16 +68,11 @@ void removeLista(int posicao) {
         }
         anterior = atual;
         atual = atual->prox;
-        i++;
     }
     if (atual->prox == NULL || posicao == 7) {
-        cout << "Atual dado: " << atual->dado;
-        system("pause");
         anterior->prox = NULL;
         delete(atual);
     } else {
-        cout << "*Atual dado: " << atual->dado;
-        system("pause");
         anterior->prox = atual->prox;
         delete(atual);
     }
@@ -89,11 +82,6 @@ void removeLista(int posicao) {
 
 void buscaLista(int valor)  {
     system("cls");
-    if (lista == NULL) {
-        cout << "\n\n\n\n\n\n\t    Lista Vazia! Insira um novo elemento.";
-        Sleep(2000);
-        return;
-    }
     struct no *aux;
     aux = lista;
     int i = 1;
@@ -106,15 +94,13 @@ void buscaLista(int valor)  {
         aux = aux->prox;
         i++;
     }
+    cout << "\n\n\n\n\n\n\t  O valor digitador não se encontra na lista!\n\n\t";
+    system("pause");
+    return;
 }
 
 void imprime() {
     system("cls");
-    if (lista == NULL) {
-        cout << "\n\n\n\n\n\n\t    Lista Vazia! Insira um novo elemento.";
-        Sleep(2000);
-        return;
-    }
     int i = 1;
     struct no *aux;
     aux = lista;
@@ -131,15 +117,15 @@ void imprime() {
 
 void recuperaLista(int posicao) {
     system("cls");
-    if (lista == NULL) {
-        cout << "\n\n\n\n\n\n\t    Lista Vazia! Insira um novo elemento.";
-        Sleep(2000);
-        return;
-    }
     struct no *aux;
     aux = lista;
     int i = 1;
     while (i != posicao) {
+        if (aux->prox == NULL) {
+            cout << "\n\n\n\n\n\n\t    Posição inválida, digite outra posição!";
+            Sleep(2000);
+            return;
+        }
         aux = aux->prox;
         i++;
     }
@@ -170,6 +156,11 @@ void menu() {
         menu();
     case 2:
         system("cls");
+        if (lista == NULL) {
+            cout << "\n\n\n\n\n\n\t    Lista Vazia! Insira um novo elemento.";
+            Sleep(2000);
+            menu();
+        }
         cout << "\n\n\n\n\n\n\tDigite a posição do valor que deseja remover: ";
         cin >> aux;
         cout << "\n";
@@ -177,16 +168,32 @@ void menu() {
         menu();
     case 3:
         system("cls");
+        if (lista == NULL) {
+            cout << "\n\n\n\n\n\n\t    Lista Vazia! Insira um novo elemento.";
+            Sleep(2000);
+            menu();
+        }
         cout << "\n\n\n\n\n\n\tDigite o valor que deseja buscar na lista: ";
         cin >> aux;
         cout << "\n";
         buscaLista(aux);
         menu();
     case 4:
+        if (lista == NULL) {
+            system("cls");
+            cout << "\n\n\n\n\n\n\t    Lista Vazia! Insira um novo elemento.";
+            Sleep(2000);
+            menu();
+        }
         imprime();
         menu();
     case 5:
         system("cls");
+        if (lista == NULL) {
+            cout << "\n\n\n\n\n\n\t    Lista Vazia! Insira um novo elemento.";
+            Sleep(2000);
+            menu();
+        }
         cout << "\n\n\n\n\n\n\t\t  Digite a posição do elemento\n\t\tque deseja recuperar da lista: ";
         cin >> aux;
         cout << "\n";
