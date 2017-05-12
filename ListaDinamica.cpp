@@ -19,18 +19,12 @@ void insereLista(int valor) {
     atual = lista;
     aux = new (struct no);
     aux->dado = valor;
-    if (atual == NULL) {
-        lista = aux;
-        aux->prox = NULL;
-    } else if (lista->prox == NULL && lista->dado > valor) {
-        lista->prox = NULL;
-        aux->prox = lista;
-        lista = aux;
-    } else if (lista->dado > valor) {
+    if (lista==NULL || lista->dado > valor) {
         aux->prox = lista;
         lista = aux;
     } else {
-        while (atual != NULL && atual->dado < valor) {
+        while (atual != NULL && atual->dado < valor)
+        {
             anterior = atual;
             atual = atual->prox;
         }
@@ -43,23 +37,17 @@ void insereLista(int valor) {
 
 void removeLista(int posicao) {
     system("cls");
-    if (posicao == 1 && lista->prox == NULL) {
-        lista = NULL;
-        delete(lista);
-        cout << "\n\n\n\n\n\n\t\tValor removido da lista com sucesso!";
-        Sleep(2000);
-        return;
-    } else if (posicao == 1) {
-        lista = lista->prox;
-        delete(lista);
-        cout << "\n\n\n\n\n\n\t\tValor removido da lista com sucesso!";
-        Sleep(2000);
-        return;
-    }
     int i;
     struct no *atual;
     struct no *anterior;
     atual = lista;
+    if (posicao == 1) {
+        lista = lista->prox;
+        delete(atual);
+        cout << "\n\n\n\n\n\n\t\tValor removido da lista com sucesso!";
+        Sleep(2000);
+        return;
+    }
     for (i=1; i<posicao; i++) {
         if (atual->prox == NULL) {
             cout << "\n\n\n\n\n\n\t    Posição inválida, digite outra posição!";
@@ -69,13 +57,8 @@ void removeLista(int posicao) {
         anterior = atual;
         atual = atual->prox;
     }
-    if (atual->prox == NULL || posicao == 7) {
-        anterior->prox = NULL;
-        delete(atual);
-    } else {
-        anterior->prox = atual->prox;
-        delete(atual);
-    }
+    anterior->prox = atual->prox;
+    delete(atual);
     cout << "\n\n\n\n\n\n\t\tValor removido da lista com sucesso!";
     Sleep(2000);
 }
