@@ -54,6 +54,7 @@ void buscaArvore(int valor) {
     while (atual != NULL) {
         if (atual->dado == valor) {
             printf("Achei");
+            delete(atual);
             return;
         }
         if (atual->dado < valor)
