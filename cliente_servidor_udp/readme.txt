@@ -1,4 +1,4 @@
-1 - gcc -o cliente cliente-udp.c -std=c99
+1 - 	gcc -o cliente cliente-udp.c -std=c99
 	gcc -o servidor servidor-udp.c -std=gnu99
 
 2 -	Dois pacotes foram compilados, um que foi enviado para o servidor e um que foi a resposta do servidor ao cliente.
